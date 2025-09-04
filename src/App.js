@@ -1,24 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import LoginSignup from  './view/auth/LoginSignup/LoginSignUp';
+import MainContainer from './view/MainContainer/MainContainer';
+
+const isLoggedIn = () => !!localStorage.getItem('token');
+
+// PublicRoute: For routes like login/signup, redirect to dashboard if logged in
+function PublicRoute({ children }) {
+  return isLoggedIn() ? <Navigate to="/dashboard" replace /> : children;
+}
+
+// PrivateRoute: For protected routes like dashboard, redirect to login if NOT logged in
+function PrivateRoute({ children }) {
+  return isLoggedIn() ? children : <Navigate to="/" replace />;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <LoginSignup />
+            </PublicRoute>
+          }
+        />
+
+        {/* Private routes */}
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <MainContainer/>
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

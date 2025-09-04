@@ -1,0 +1,14 @@
+.img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+                /* space between logo and text */
+  font-size: 20px;         /* text size */
+  font-weight: bold;       /* bold text */
+  color: #333;             /* text color */
+  margin-top: 15px;
+}
+
+
+
+

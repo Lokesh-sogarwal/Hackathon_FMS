@@ -1,0 +1,76 @@
+/* layout.css */
+
+/* Overall layout container */
+.layout-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent main layout from scrolling */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar container - fixed */
+.side-bar-container {
+  width: 250px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed; /* Fix sidebar on screen */
+  left: 0;
+  top: 0;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Content wrapper */
+.content-box {
+  margin-left: 250px; /* Same as sidebar width */
+  flex-grow: 1;
+  height: 100vh;
+  overflow-y: auto; /* Only children scroll */
+  padding: 20px;
+  background-color: #f5f7fa;
+}
+
+/* Navbar fixed at top */
+.content-box nav {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background-color: #ffffff;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* User toast notifications */
+.Toastify__toast-container {
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .side-bar-container {
+    width: 200px;
+  }
+  .content-box {
+    margin-left: 200px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+  .side-bar-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .content-box {
+    margin-left: 0;
+    padding: 16px;
+  }
+}
