@@ -1,14 +1,19 @@
-.img {
+/* header.css */
+
+/* Container for logo and text */
+.header-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-                /* space between logo and text */
-  font-size: 20px;         /* text size */
-  font-weight: bold;       /* bold text */
-  color: #333;             /* text color */
-  margin-top: 15px;
+  gap: 8px;               
+  margin: 15px;
+  padding: 20px 0;
+  border-bottom: 1px solid  rgba(0, 0, 0, 0.652); /* subtle bottom border */
 }
 
-
-
-
+/* Text beside the logo */
+.header-logo span {
+  font-size: 20px;        /* text size */
+  font-weight: bold;      /* bold text */
+  color: #333;            /* text color */
+}

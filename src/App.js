@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginSignup from  './view/auth/LoginSignup/LoginSignUp';
+import LoginSignup from './view/auth/LoginSignup/LoginSignUp';
 import MainContainer from './view/MainContainer/MainContainer';
 
 const isLoggedIn = () => !!localStorage.getItem('token');
