@@ -1,5 +1,52 @@
+/* Sidebar container */
 .sidebar {
-  background-color: white; /* Bootstrap light gray */
-  color: #fff; /* Keep text visible */
+  background-color: #ffffff; /* clean white */
+  color: #000; /* default text color black */
+  width: 250px;
+  min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Flex wrapper for icons + text */
+.cont {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+  line-height: 1.5;
+  color: #000; /* ensures black text */
   
+}
+
+/* Sidebar list items */
+.sidebar-item {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  list-style: none;
+}
+
+/* Hover effect */
+.sidebar-item:hover {
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+/* Icon */
+.cont span:first-child {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text */
+.cont span:last-child {
+  font-size: 1.1rem;
+  font-weight: 500;
 }

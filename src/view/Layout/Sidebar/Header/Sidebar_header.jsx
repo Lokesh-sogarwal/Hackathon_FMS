@@ -4,13 +4,11 @@ import './header.css';
 
 const Sidebar_header = () => {
   return (
-    <div>
-      <div className="img">
-        {/* <img src={myimage} alt="logo" width={70} /> */}
-        <span>Bloger</span>
-      </div>      
+    <div className="header-logo">
+      {/* <img src={myimage} alt="logo" width={70} /> */}
+      <span>BrandName</span>
     </div>
   )
 }
 
-export default Sidebar_header
+export default Sidebar_header;

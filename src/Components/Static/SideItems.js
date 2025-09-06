@@ -9,15 +9,15 @@ export const Items = [
     },
     {
         id: 2,
-        title: "Active USers ",
-        icon: <MdDashboard/>,
+        title: "Active Users ",
+        icon: <FaUsers/>,
         link: "/active_users"
     },
     {
         id: 3,
         title: "User Management",
-        icon: <MdDashboard/>,
-        link: "/user_management"
+        icon: <FaUser/>,
+        link: "/users"
     },
     {
         id: 4,

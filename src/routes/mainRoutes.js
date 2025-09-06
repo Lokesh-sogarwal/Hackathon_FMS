@@ -1,7 +1,7 @@
 // import Dashboard from '../view/users/Dashboard/dashboard';
-// import Profile from '../view/users/Profile/profile';
+import Profile from '../view/Users/Profile/Profile';
 // import AboutUs from '../view/users/User_details/aboutus';
-// import Userdetails from '../view/users/User_details/userdetails'; 
+import Userdetails from '../view/Users/UserDeatils/UserDetails'; 
 // import Change_password from '../view/users/ChangePassword/Changepassword';
 // import Otp from '../view/auth/OTP/Otp';
 // import Add_blogs from '../view/users/Blogs/add_blogs/add_blog';
@@ -19,21 +19,21 @@ export const userRoutes = [
 //     path: "dashboard",   // no leading slash for nested routes
 //     element: <Dashboard />
 //   },
-//   {
-//     id: 2,
-//     path: "profile",
-//     element: <Profile />
-//   },
+  {
+    id: 2,
+    path: "profile",
+    element: <Profile />
+  },
 //   {
 //     id: 3,
 //     path: "aboutus",
 //     element: <AboutUs />
 //   },
-//   {
-//     id: 4,
-//     path: "users",
-//     element: <Userdetails />
-//   },
+  {
+    id: 4,
+    path: "users",
+    element: <Userdetails />
+  },
 //   {
 //     id: 5,
 //     path: "defaultchangepassword",

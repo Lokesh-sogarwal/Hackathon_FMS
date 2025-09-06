@@ -4,6 +4,7 @@ import Sidebar_header from "./Header/Sidebar_header";
 import { useNavigate } from "react-router-dom";
 import { Logout } from "../../../utils/logout";
 import { jwtDecode } from "jwt-decode";
+import './sidebar.css';
 
 
 const Sidebar = () => {
@@ -55,7 +56,7 @@ const Sidebar = () => {
             className={`d-flex align-items-center gap-2 px-3 py-2 rounded list-unstyled sidebar-item ${item.id === 4 ? "text-danger" : "text-dark"}`}
             style={{ cursor: "pointer" }}
           >
-            <div className="d-flex justify-content-center align-items-center sidebar-item-content" style={{color:"black"}}>
+            <div className=" cont" style={{color:"black"}}>
               <span className="text-dark p-2 " style={{ fontSize: "1.3rem" }}>{item.icon}</span>
               <span className="fw-medium text-dark p-2" style={{ fontSize: "1.1rem" }}>{item.title}</span>
             </div>

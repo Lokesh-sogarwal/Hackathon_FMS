@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./LoginSignup.css";
-// import myimage from "../../../Assets/login.png";
+import myimage from "../../../Assets/login.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; 
+import { toast, ToastContainer } from "react-toastify"; 
 // import { auth, provider, signInWithPopup } from "../../../firebase"; 
 
 const LoginSignup = () => {
@@ -98,7 +98,7 @@ const LoginSignup = () => {
       <div className="login-signup-container">
         {/* LEFT SIDE */}
         <div className="leftcontainer">
-          {/* <img src={myimage} alt="Login" width={450} /> */}
+          <img src={myimage} alt="Login" width={450} />
           <div className="text">
             Discover the power of personalized health insights <br />
             and seamless integration with your daily routine.
@@ -207,6 +207,7 @@ const LoginSignup = () => {
           </div>
         </div>
       </div>  
+      <ToastContainer/>
     </div>
   );
 };
