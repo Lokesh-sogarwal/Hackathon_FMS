@@ -12,6 +12,8 @@ import LiveTracking from '../view/Users/Live Tracking/LiveTracking';
 import BusRoute from '../view/Users/Route/BusRoute';
 import AllRoutes from '../view/Users/Route/AllRoutes';
 import BusTracking from '../view/Users/Live Tracking/BusTracking';
+import Landing from '../view/auth/LandingPage/Landing';
+
 
 
 
@@ -84,6 +86,14 @@ export const userRoutes = [
     id: 19,
     path: "schedule-details",
     element: <BusTracking />
+  },
+  {
+    id: 20,
+    path: "landing_page",
+    element: <Landing />
   }
 
 ];
+
+
+
