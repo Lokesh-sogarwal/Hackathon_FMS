@@ -1,0 +1,49 @@
+/* Dashboard main container (cards row) */
+.dashboard-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/* Each card (users, blogs, published blogs) */
+.User-card {
+  background: transparent;
+  border-radius: 12px;
+  /* padding: px; */
+  width: 100%;
+  /* min-height: 300px; */
+  /*  */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+/* Chart container row */
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: nowrap; /* keep side by side */
+}
+
+/* Each chart */
+.Chart-card {
+  flex: 1; /* equal width */
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.Chart-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive: stack on smaller screens */
+@media (max-width: 992px) {
+  .chart-container {
+    flex-direction: column;
+  }
+}
