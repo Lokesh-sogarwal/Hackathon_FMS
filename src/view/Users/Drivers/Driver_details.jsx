@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./UserDetails.css";
+import "./Driver.css";
 import { ToastContainer, toast } from "react-toastify";
 import { confirmAlert } from "react-confirm-alert";
 import Modal from "react-modal";
@@ -25,7 +25,7 @@ const customStyles = {
   },
 };
 
-const UserDetails = () => {
+const DriverDetails = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [activeUserId, setActiveUserId] = useState(null);
@@ -72,7 +72,7 @@ const UserDetails = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:5000/view/user_details", {
+        const res = await fetch("http://localhost:5000/view/driver_details", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -270,7 +270,7 @@ const UserDetails = () => {
 
 
             {/* Role Filter */}
-            <DropdownButton
+            {/* <DropdownButton
               id="dropdown-basic-button"
               title={`Filter: ${selectedRole}`}
               onSelect={(role) => setSelectedRole(role)}
@@ -282,14 +282,14 @@ const UserDetails = () => {
               <Dropdown.Item eventKey="Driver">Driver</Dropdown.Item>
               <Dropdown.Item eventKey="Passenger">Passenger</Dropdown.Item>
               <Dropdown.Item eventKey="Operator">Operator</Dropdown.Item>
-            </DropdownButton>
-            <button
+            </DropdownButton> */}
+            {/* <button
               type="button"
               className="btn btn-primary mb-3"
               onClick={openCreateModal}
             >
               Create User
-            </button>
+            </button> */}
           </div>      
             <table className="table table-striped table-bordered">
               <thead>
@@ -491,4 +491,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default DriverDetails;

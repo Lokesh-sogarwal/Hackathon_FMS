@@ -1,0 +1,93 @@
+.routes-container {
+  margin: 20px auto;
+  padding: 20px;
+  
+}
+
+.route-info {
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Grid layout for cards */
+.schedule-cards {
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  flex-direction: column;
+}
+
+/* ✅ Card Styles */
+.schedule-card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-card:hover {
+  /* transform: translateY(-5px); */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bus-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.schedule-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #007bff;
+}
+
+.card-body {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* ✅ Status borders */
+.status-on_time {
+  border-left: 5px solid green;
+}
+.status-delayed {
+  border-left: 5px solid orange;
+}
+.status-cancelled {
+  border-left: 5px solid red;
+}
+
+/* ✅ Status tags */
+.status-tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status-tag.on_time {
+  background: #d4edda;
+  color: #155724;
+}
+.status-tag.delayed {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-tag.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
