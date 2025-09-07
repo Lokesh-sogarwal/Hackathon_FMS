@@ -4,13 +4,15 @@ import Profile from '../view/Users/Profile/Profile';
 import Userdetails from '../view/Users/UserDeatils/UserDetails'; 
 // import Change_password from '../view/users/ChangePassword/Changepassword';
 // import Otp from '../view/auth/OTP/Otp';
-// import Add_blogs from '../view/users/Blogs/add_blogs/add_blog';
 // import Active_Users from '../view/users/Dashboard/Active_user_details/active_user_details';
-// import Published_Blogs from '../view/users/Blogs/user_blogs/User_blogs';
-// import Blogs_Dashboard from '../view/users/Blogs/blog_dashboard/blog_dashboard';
-// import UserBlog from '../view/users/Blogs/user_blogs/User_blogs';
-// import EditBlog from '../view/users/Blogs/editBlog/edit_blogs';
 // import Chat from '../view/Chatbox/chat';
+import DriverDetails from '../view/Users/Drivers/Driver_details';
+import DriverUpload from '../view/Users/Upload_File/DriverUpload';
+import LiveTracking from '../view/Users/Live Tracking/LiveTracking';
+import BusRoute from '../view/Users/Route/BusRoute';
+import AllRoutes from '../view/Users/Route/AllRoutes';
+import BusTracking from '../view/Users/Live Tracking/BusTracking';
+
 
 
 export const userRoutes = [
@@ -50,34 +52,38 @@ export const userRoutes = [
 //     element: <Active_Users />   // ✅ will render inside Layout
 //   },
 //   {
-//     id:8,
-//     path:"add_blogs",
-//     element:<Add_blogs/>
-//   },
-//   {
-//     id:9,
-//     path:"published_blogs",
-//     element:<Published_Blogs/>
-//   },
-//   {
-//     id:10,
-//     path:"blogs",
-//     element:<Blogs_Dashboard/>
-//   },
-//   {
-//     id:11,
-//     path:"blogs/:id",
-//     element:<UserBlog/>
-//   },
-//   {
-//     id:12,
-//     path:"edit_blogs/:id",
-//     element:<EditBlog/>
-//   },
-//   {
 //     id:13,
 //     path:"Chats",
 //     element:<Chat/>
-//   }
+//   },
+  {
+    id: 14,
+    path: "drivers",
+    element: <DriverDetails />
+  },
+  {
+    id: 15,
+    path: "upload",
+    element: <DriverUpload />
+  },
+  {
+    id: 16,
+    path: "live_tracking",
+    element: <LiveTracking />
+  },
+  {
+    id: 17,
+    path: "Create_routes",
+    element: <BusRoute />
+  },{
+    id: 18,
+    path: "all_routes",
+    element: <AllRoutes />
+  }
+  ,{
+    id: 19,
+    path: "schedule-details",
+    element: <BusTracking />
+  }
 
 ];

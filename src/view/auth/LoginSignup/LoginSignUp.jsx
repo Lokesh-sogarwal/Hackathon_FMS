@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify"; 
-// import { auth, provider, signInWithPopup } from "../../../firebase"; 
 
 const LoginSignup = () => {
   const [action, setAction] = useState("Login");
@@ -14,6 +13,7 @@ const LoginSignup = () => {
     fullname: "",
     email: "",
     password: "",
+    role: "Passenger", // ✅ default role
   });
   const navigate = useNavigate();
 
@@ -73,7 +73,6 @@ const LoginSignup = () => {
           body: JSON.stringify({
             ...formData,
             is_password_change: true,
-            role: "Passenger",
           }),
         });
 
@@ -183,6 +182,31 @@ const LoginSignup = () => {
                     onChange={handleChange}
                     required
                   />
+
+                  {/* ✅ Role Selection */}
+                  <div className="role-select">
+                    <label>
+                      <input
+                        type="radio"
+                        name="role"
+                        value="Passenger"
+                        checked={formData.role === "Passenger"}
+                        onChange={handleChange}
+                      />
+                      Passenger
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="role"
+                        value="Driver"
+                        checked={formData.role === "Driver"}
+                        onChange={handleChange}
+                      />
+                      Driver
+                    </label>
+                  </div>
+
                   <button type="submit">Sign Up</button>
                 </form>
                 <div className="footer">

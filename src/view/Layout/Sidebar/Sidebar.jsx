@@ -34,7 +34,7 @@ const Sidebar = () => {
       if (item.title === "Login" || item.title === "Signup") return false;
 
       // Only superadmin sees Active Users and User Details
-      if ((item.title === "Active Users" || item.title === "Users") && role !== "superadmin") {
+      if ((item.title === "Active Users" || item.title === "Users" || item.title === "Driver") && role !== "Superadmin" && role!=="Admin") {
         return false;
       }
 
