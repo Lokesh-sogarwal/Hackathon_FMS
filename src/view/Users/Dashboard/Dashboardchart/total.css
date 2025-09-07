@@ -1,0 +1,65 @@
+.total-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* Top Row (Title + Arrow) */
+.total-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4B6EC0;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.total-card-header svg {
+  margin-right: 6px;
+  color: #4B6EC0;
+}
+
+/* Main Count */
+.total-card-count {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f39c12; /* Orange like screenshot */
+  margin: 12px 0 6px 0;
+}
+
+/* Subtitle */
+.total-card-subtitle {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+/* Footer (Confirmed / Not Confirmed) */
+.total-card-footer {
+  display: flex;
+  border-top: 1px solid #eee;
+  margin-top: 12px;
+}
+
+.total-card-footer div {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.total-card-footer div:first-child {
+  border-right: 1px solid #eee;
+}
+
+.total-card-footer strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #4B6EC0;
+}
