@@ -31,6 +31,31 @@ const parseTime = (timeStr) => {
   return d;
 };
 
+// 🚍 Calculate total ETA from start → end using lat/lng
+const calculateRouteETA = (startLat, startLng, endLat, endLng, avgSpeed = 40) => {
+  if (
+    [startLat, startLng, endLat, endLng].some(
+      (coord) => coord === null || coord === undefined || isNaN(coord)
+    )
+  ) {
+    return { distance: 0, eta: "N/A", duration: 0 };
+  }
+
+  const distance = haversine([startLat, startLng], [endLat, endLng]); // km
+  const travelHours = distance / avgSpeed;
+  const travelMinutes = Math.round(travelHours * 60);
+
+  // Estimate arrival time from *now*
+  const now = new Date();
+  const etaTime = new Date(now.getTime() + travelMinutes * 60000);
+
+  return {
+    distance: distance.toFixed(2), // km
+    eta: etaTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    duration: travelMinutes,
+  };
+};
+
 const RoutesPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,21 +95,19 @@ const RoutesPage = () => {
 
     return sorted.map((stop, idx) => {
       if (idx === 0) {
-        // Base time = scheduled arrival_time of first stop
         currentTime = parseTime(stop.arrival_time);
         return {
           ...stop,
           est_reach: currentTime
             ? currentTime.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })
+              hour: "2-digit",
+              minute: "2-digit",
+            })
             : "Invalid time",
           duration: 0,
         };
       }
 
-      // Calculate distance between prev and current stop
       const prevStop = sorted[idx - 1];
       const distance = haversine(
         [Number(prevStop.stop_lat), Number(prevStop.stop_lng)],
@@ -92,8 +115,6 @@ const RoutesPage = () => {
       );
 
       const travelMinutes = Math.round((distance / avgSpeed) * 60);
-
-      // Add travel time to current time
       if (currentTime) {
         currentTime = new Date(currentTime.getTime() + travelMinutes * 60000);
       }
@@ -102,9 +123,9 @@ const RoutesPage = () => {
         ...stop,
         est_reach: currentTime
           ? currentTime.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })
+            hour: "2-digit",
+            minute: "2-digit",
+          })
           : "Calculating...",
         duration: travelMinutes,
       };
@@ -112,6 +133,15 @@ const RoutesPage = () => {
   };
 
   const schedulesWithETA = calculateETAs(routeData.schedules);
+
+  // 🔹 Direct ETA from start → end
+  const directETA = calculateRouteETA(
+    Number(routeData.start_lat),
+    Number(routeData.start_lng),
+    Number(routeData.end_lat),
+    Number(routeData.end_lng),
+    avgSpeed
+  );
 
   return (
     <div className="routes-container">
@@ -122,6 +152,15 @@ const RoutesPage = () => {
         <p>
           <b>To:</b> {routeData.end_point}
         </p>
+        <p>
+          📏 <b>Distance:</b> {directETA.distance} km
+        </p>
+        <p>
+          ⏱️ <b>Estimated Travel Time:</b> {directETA.duration} min
+        </p>
+        {/* <p>
+          🎯 <b>ETA at Destination:</b> {directETA.eta}
+        </p> */}
       </div>
 
       {schedulesWithETA?.length > 0 ? (
@@ -135,15 +174,23 @@ const RoutesPage = () => {
               <div className="card-header">
                 <img src={busImg} alt="Bus" className="bus-img" />
                 <h3>
-                  {routeData.start_point} → {sched.stop_name}
+                  {routeData.start_point} → {routeData.end_point}
                 </h3>
               </div>
               <div className="card-body">
                 <p>
                   <b>Start:</b> {sched.arrival_time} →{" "}
-                  <b>Est. Reach:</b> {sched.est_reach}{" "}
-                  {sched.duration > 0 && <span>({sched.duration} min)</span>}
+                  <b>Est. Reach:</b>{" "}
+                  {(() => {
+                    const base = parseTime(sched.arrival_time);
+                    if (!base) return "Invalid time";
+
+                    const est = new Date(base.getTime() + directETA.duration * 60000);
+                    return est.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+                  })()}
+                  {sched.duration > 0 && <span> ({sched.duration} min)</span>}
                 </p>
+
                 <p>
                   <b>Status:</b>{" "}
                   <span className={`status-tag ${sched.status}`}>
@@ -155,7 +202,7 @@ const RoutesPage = () => {
                   {new Date(sched.date).toLocaleDateString("en-GB")}
                 </p>
                 <p>
-                  <b>Stop:</b> {sched.stop_name}
+                  <b>Stop:</b> {routeData.end_point}
                 </p>
               </div>
             </div>
@@ -169,4 +216,3 @@ const RoutesPage = () => {
 };
 
 export default RoutesPage;
- 
