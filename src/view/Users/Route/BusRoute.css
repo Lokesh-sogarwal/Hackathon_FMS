@@ -192,3 +192,48 @@
 .route-path {
   color: #7f8c8d;
 }
+.form-group {
+  position: relative; /* Make suggestions absolute relative to this */
+  margin-bottom: 20px;
+}
+
+.suggestions {
+  position: absolute; /* Absolute positioning */
+  top: 100%; /* Right below the input */
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 0;
+  margin: 4px 0 0 0;
+  list-style: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.suggestions li:hover {
+  background-color: #f0f8ff;
+}
+
+.stop-input {
+  position: relative; /* Needed for suggestion positioning for each stop */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.stop-input input {
+  flex: 1;
+}
+

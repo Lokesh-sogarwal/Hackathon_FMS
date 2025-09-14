@@ -209,7 +209,7 @@ const LoginSignup = () => {
 
                   <button type="submit">Sign Up</button>
                 </form>
-                <div className="footer">
+                <div className="footer_login">
                   <p>
                     Already have an account? <span onClick={toggleAction}>Login</span>
                   </p>

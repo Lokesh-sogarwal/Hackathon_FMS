@@ -151,20 +151,21 @@
   margin-bottom: 10px;
 }
 
-/* FOOTER */
-.footer {
+/* footer*/
+.footer_login {
   font-size: 14px;
   color: #555;
+  background-color: white;
 }
 
-.footer span {
+.footer_login span {
   color: #009ffd;
   font-weight: 600;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.footer span:hover {
+.footer_login span:hover {
   color: #007acc;
 }
 

@@ -2,10 +2,8 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 24px;
-  box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
-  align-items: center;
+  align-items: start;
 }
 
 .map {
@@ -25,8 +23,8 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  height: 83%;
   gap: 18px;
+  position: relative;
 }
 
 .route_details label {
@@ -35,11 +33,17 @@
   color: #333;
 }
 
+.input-wrapper {
+  position: relative;
+  width: 92%;
+  margin-bottom: 12px;
+}
+
 .route_details input {
   padding: 12px;
   border: 1.5px solid #d0d7de;
   border-radius: 10px;
-  width: 92%;
+  width: 100%;
   font-size: 14px;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
@@ -70,7 +74,41 @@
   transform: translateY(0);
 }
 
-/* Responsive: stack vertically on small screens */
+.suggestions {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.suggestions li:hover {
+  background-color: #f0f8ff;
+}
+
+.loading-text {
+  font-size: 13px;
+  color: #007bff;
+  margin: 4px 0;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .livetracking-container {
     grid-template-columns: 1fr;
@@ -84,5 +122,9 @@
 
   .route_details {
     padding: 20px;
+  }
+
+  .input-wrapper {
+    width: 100%;
   }
 }

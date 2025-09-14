@@ -8,8 +8,6 @@ import { faSpinner, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-toastify/dist/ReactToastify.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 
 Modal.setAppElement("#root");
 
@@ -31,6 +29,8 @@ const DriverDetails = () => {
   const [activeUserId, setActiveUserId] = useState(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [formData, setFormData] = useState({
     fullname: "",
@@ -40,6 +40,13 @@ const DriverDetails = () => {
     dob: "",
     role: "",
   });
+  const [upload_data, setUploadData] = useState({
+    file: "",
+    document_type: "",
+    expiry_date: "",
+  });
+
+  const [upload, setUpload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -188,9 +195,24 @@ const DriverDetails = () => {
     setCreateModalOpen(true);
   };
 
+  const openUploadModal = (user) => {
+    setSelectedUser(user);
+    setUploadData({ file: "", document_type: "", expiry_date: "" });
+    setUploadModalOpen(true);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleUploadChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "file") {
+      setUploadData((prev) => ({ ...prev, file: files[0] }));
+    } else {
+      setUploadData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   function calculateAge(dobString) {
@@ -206,6 +228,42 @@ const DriverDetails = () => {
       age--;
     return age;
   }
+
+  const upload_doc = async () => {
+    const { file, document_type, expiry_date } = upload_data;
+    if (!file || !document_type) {
+      toast.error("File and Document type are required!");
+      return;
+    }
+    setUpload(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("document_type", document_type);
+      formData.append("expiry_date", expiry_date);
+
+      const res = await fetch(
+        `http://localhost:5000/view/upload/${selectedUser.user_uuid}`,
+        {
+          method: "POST",
+          headers: { Authorization: "Bearer " + token },
+          body: formData,
+        }
+      );
+
+      if (!res.ok) {
+        toast.error("Error while uploading...");
+        return;
+      }
+
+      toast.success("Document uploaded successfully!");
+      setUploadModalOpen(false);
+    } catch (err) {
+      toast.error("Facing an error with API..");
+    } finally {
+      setUpload(false);
+    }
+  };
 
   const create_user = async () => {
     const { fullname, email, role } = formData;
@@ -252,11 +310,7 @@ const DriverDetails = () => {
 
   return (
     <div className="d-flex">
-     
-
       <div className="flex-grow-1 p-4">
-        {/* <h2>User Details</h2> */}
-
         {error && <p className="text-danger">{error}</p>}
 
         {loading ? (
@@ -266,31 +320,6 @@ const DriverDetails = () => {
           </div>
         ) : (
           <>
-          <div className="controller-button">
-
-
-            {/* Role Filter */}
-            {/* <DropdownButton
-              id="dropdown-basic-button"
-              title={`Filter: ${selectedRole}`}
-              onSelect={(role) => setSelectedRole(role)}
-              className="mb-3"
-            >
-              <Dropdown.Item eventKey="All">All</Dropdown.Item>
-              <Dropdown.Item eventKey="Superadmin">Super-Admin</Dropdown.Item>
-              <Dropdown.Item eventKey="Admin">Admin</Dropdown.Item>
-              <Dropdown.Item eventKey="Driver">Driver</Dropdown.Item>
-              <Dropdown.Item eventKey="Passenger">Passenger</Dropdown.Item>
-              <Dropdown.Item eventKey="Operator">Operator</Dropdown.Item>
-            </DropdownButton> */}
-            {/* <button
-              type="button"
-              className="btn btn-primary mb-3"
-              onClick={openCreateModal}
-            >
-              Create User
-            </button> */}
-          </div>      
             <table className="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -338,11 +367,18 @@ const DriverDetails = () => {
                             </button>
                             <button
                               type="button"
-                              className="btn btn-sm btn-danger"
+                              className="btn btn-sm btn-danger me-2"
                               onClick={() => confirmDelete(user.user_uuid)}
                               disabled={deleting}
                             >
                               {deleting ? "Deleting..." : "Delete"}
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-info"
+                              onClick={() => openUploadModal(user)}
+                            >
+                              Upload
                             </button>
                           </div>
                         )}
@@ -460,7 +496,6 @@ const DriverDetails = () => {
             className="form-control mb-3"
           >
             <option value="">-- Select Role --</option>
-            {/* <option value="Superadmin">SuperAdmin</option> */}
             <option value="Admin">Admin</option>
             <option value="Driver">Driver</option>
             <option value="Passenger">Passenger</option>
@@ -484,6 +519,60 @@ const DriverDetails = () => {
             </button>
           </div>
         </form>
+      </Modal>
+
+      {/* Upload Modal */}
+      <Modal
+        isOpen={uploadModalOpen}
+        onRequestClose={() => setUploadModalOpen(false)}
+        style={customStyles}
+        contentLabel="Upload Document"
+      >
+        <h2>Upload Document</h2>
+        {selectedUser && (
+          <form>
+            <label>File:</label>
+            <input
+              type="file"
+              name="file"
+              onChange={handleUploadChange}
+              className="form-control mb-2"
+            />
+            <label>Document Type:</label>
+            <input
+              type="text"
+              name="document_type"
+              value={upload_data.document_type}
+              onChange={handleUploadChange}
+              className="form-control mb-2"
+            />
+            <label>Expiry Date:</label>
+            <input
+              type="date"
+              name="expiry_date"
+              value={upload_data.expiry_date}
+              onChange={handleUploadChange}
+              className="form-control mb-3"
+            />
+            <div className="d-flex gap-2">
+              <button
+                type="button"
+                onClick={upload_doc}
+                disabled={upload}
+                className="btn btn-info"
+              >
+                {upload ? "Uploading..." : "Upload"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setUploadModalOpen(false)}
+                className="btn btn-secondary"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        )}
       </Modal>
 
       <ToastContainer />

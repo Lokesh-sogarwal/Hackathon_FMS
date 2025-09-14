@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginSignup from './view/auth/LoginSignup/LoginSignUp';
 import MainContainer from './view/MainContainer/MainContainer';
+import Landing from './view/auth/LandingPage/Landing'
 
 const isLoggedIn = () => !!localStorage.getItem('token');
 
@@ -23,9 +24,17 @@ function App() {
           path="/"
           element={
             <PublicRoute>
-              <LoginSignup />
+              <Landing />
             </PublicRoute>
           }
+        />
+        <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginSignup />
+          </PublicRoute>
+        }
         />
 
         {/* Private routes */}

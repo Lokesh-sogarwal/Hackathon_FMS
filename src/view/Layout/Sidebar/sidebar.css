@@ -15,6 +15,7 @@
 
 /* Flex wrapper for icons + text */
 .cont {
+  justify-content: center;
   display: flex;
   align-items: center;
   gap: 15px;
