@@ -1,49 +1,198 @@
-/* Dashboard main container (cards row) */
+/* Main dashboard container - grid spacing */
 .dashboard-container {
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 30px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-/* Each card (users, blogs, published blogs) */
-.User-card {
-  background: transparent;
+/* Card style for user, teacher, payment, etc */
+.User-card, .dashboard-card {
+  background: #fff;
   border-radius: 12px;
-  /* padding: px; */
-  width: 100%;
-  /* min-height: 300px; */
-  /*  */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 26px 18px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 18px;
+  transition: box-shadow 0.2s;
+  position: relative;
 }
 
+/* Card hover effect */
+.User-card:hover, .dashboard-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+}
 
-/* Chart container row */
+/* Card header style */
+.User-card h6, .dashboard-card h6 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2267e3;
+  margin-bottom: 10px;
+}
+
+/* Card numbers */
+.User-card h2, .dashboard-card h2 {
+  color: #FA8C16;
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+/* Small info and labels */
+.User-card p, .dashboard-card p, 
+.User-card div, .dashboard-card div {
+  font-size: 1rem;
+  color: #464646;
+  margin-bottom: 4px;
+}
+
+/* Payment card highlight */
+.dashboard-card.payment {
+  background: linear-gradient(90deg, #eaf6fd 0%, #fdf6e4 100%);
+}
+
+.dashboard-card.payment h2 {
+  color: #3CA5F6;
+}
+
+.dashboard-card.notification {
+  min-height: 140px;
+}
+
+.dashboard-card.notification p {
+  color: #818181;
+  font-size: 1rem;
+}
+
+/* Subjects/icons row style */
+.subjects-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.subjects-card .subject-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Calendar and notifications */
+.dashboard-card.calendar {
+  min-height: 140px;
+}
+
+.dashboard-card.calendar .event-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+/* Task cards style */
+.dashboard-card.taskcard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 20px;
+}
+
+.dashboard-card.taskcard .task-row {
+  margin-bottom: 10px;
+}
+
+/* Chart Row - horizontal cards */
 .chart-container {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  gap: 20px;
-  padding: 20px;
-  flex-wrap: nowrap; /* keep side by side */
+  gap: 24px;
+  padding: 26px 0;
+  flex-wrap: nowrap;
 }
 
-/* Each chart */
 .Chart-card {
-  flex: 1; /* equal width */
-  background: #ffffff;
+  flex: 1;
+  background: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 26px;
   min-height: 350px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Chart hover */
 .Chart-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 
-/* Responsive: stack on smaller screens */
+/* Sidebar navigation - if present */
+.sidebar {
+  background: #fff;
+  min-width: 220px;
+  height: 100vh;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.04);
+  border-radius: 0 14px 14px 0;
+  padding: 20px 0;
+  position: fixed;
+  left: 0;
+  z-index: 10;
+}
+
+/* Responsive styling */
 @media (max-width: 992px) {
-  .chart-container {
+  .dashboard-container .row {
     flex-direction: column;
   }
+  .chart-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 0;
+  }
+  .sidebar {
+    position: relative;
+    min-width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 10px 0;
+  }
+}
+
+/* Notification/messages panel */
+.dashboard-card.notification,
+.dashboard-card.message {
+  background: #fff;
+  min-height: 120px;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 20px;
+}
+
+/* Hide scrollbars in edge cases */
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f2f2f2;
+  border-radius: 8px;
 }

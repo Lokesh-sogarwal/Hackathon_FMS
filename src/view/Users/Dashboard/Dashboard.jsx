@@ -5,9 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { jwtDecode } from 'jwt-decode';
 import Chart from './Dashboardchart/chart';
 import TotalUsers from './Dashboardchart/total_Users';
-// import Active_Users from './Dashboardchart/active_user';
-// import Total_Blogs from '../Blogs/total_Blogs/total_blog';
-// import Blog_chart from '../Blogs/total_Blogs/blogs_chart';
+import Total_routes from '../Dashboard/Total_routes/Total_routes'
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -61,9 +59,9 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col-md-6">
-            {/* <div className="User-card d-flex flex-column align-items-center justify-content-center">
-              <Total_Blogs />
-            </div> */}
+            <div className="User-card d-flex flex-column align-items-center justify-content-center">
+              <Total_routes />
+            </div>
           </div>
         </div>
       </div>

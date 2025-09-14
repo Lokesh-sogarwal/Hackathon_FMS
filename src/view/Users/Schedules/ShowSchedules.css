@@ -1,0 +1,31 @@
+.schedule-container {
+  padding: 20px;
+}
+
+.filter-section {
+  margin-bottom: 15px;
+}
+
+.filter-section input,
+.filter-section button {
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.schedule-table th {
+  background-color: #4caf50;
+  color: white;
+}
